@@ -3,6 +3,10 @@ package imageprocessing;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import detectors.FoundationPipeline.Foundation;
+import detectors.FoundationPipeline.Pipeline;
+import detectors.FoundationPipeline.SkyStone;
+import detectors.FoundationPipeline.Stone;
 import detectors.OpenCvDetector;
 
 /*
@@ -23,11 +27,24 @@ import detectors.OpenCvDetector;
 @TeleOp(name = "CV test", group = "Auto")
 public class OpenCVDetection extends OpMode {
 
+
+	/*
+	You cannot instantiate the actual object here. Must do it either in init() or OnOpmodeStart()
+	 However, it's good to make this reference a field
+	 */
 	OpenCvDetector fieldElementDetector;
 
 	@Override
 	public void init() {
+		/*
+		Makes an OpenCV detector
+		 */
 		fieldElementDetector = new OpenCvDetector(this);
+
+		/*
+		alternatively, use fieldElementDetector = new OpenCvDetector(this,false);
+		to run without video and with slightly faster processing
+		 */
 	}
 
 	/*
@@ -42,7 +59,22 @@ public class OpenCVDetection extends OpMode {
 	 */
 	@Override
 	public void start() {
+
+		/*
+		Using start() and stop() will turn the detector on and off. Just like a stove, turn
+		it off when not in use! It will consume memory and processing resources.
+		 */
+
 		fieldElementDetector.start();
+
+		/*
+		To toggle individual element detection, use the following.
+		Note that the detector must still be enabled for any element detection to occur
+		 */
+		Pipeline.doSkyStones = true;
+		Pipeline.doStones = false;
+		Pipeline.doFoundations = false;
+
 	}
 
 	/*
@@ -50,7 +82,24 @@ public class OpenCVDetection extends OpMode {
 	 */
 	@Override
 	public void loop() {
+		/*
+		To request data, use these requests
+	    */
+		SkyStone[] skyStones = fieldElementDetector.getSkyStones();
+		Stone[] stones = fieldElementDetector.getStones();
+		Foundation[] foundations = fieldElementDetector.getFoundations();
 
+		/*
+		If the detector is not enabled or the specific element is set to false, these
+		method calls will return an empty array
+		 */
+
+		/*
+		Each element object has the center x and y. Just do Skystone.x etc.
+
+		Hold your phone horizontally, with cameras on right. origin on (0,0).
+		Width is 640, height is 480 pixels. For example, center is (320,240)
+		 */
 	}
 
 	/*
@@ -58,6 +107,10 @@ public class OpenCVDetection extends OpMode {
 	 */
 	@Override
 	public void stop() {
+		/*
+		To save resources
+		 */
+
 		fieldElementDetector.stop();
 	}
 }
