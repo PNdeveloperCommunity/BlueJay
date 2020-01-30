@@ -35,28 +35,6 @@ I've been lax on documentation, so ask if there is ambiguity
 First off, working code for everyone:
 
 	*Stuff here is outdated, bleh. Check teamcode for example.	
-
-
-All classes that the user uses follow a simple guideline: a constructor with clear parameter requirements, a `start()` method to begin computing, a `stop()` method to stop computing, and one method with `get` at the beginning of its name. This returns whatever the class is used for.
-
-For example:
-
-	ImageDetector detector = new ImageDetector(this, false);
-	detector.start();
-
-Is used to get the Vuforia localizer running. It requires an opmode instance and a boolean for whether the RC should display its view.
-
-Please realize the purpose of the `start()` and `stop()` methods. We've made a careful decision to include them even though they make the library more complicated. Keeping all the detectors active (ie. calling start() for each) will cause your framerate to plummet and latency to increase.
-
-To request data, simply do:
-
-	detector.getPosition();
-
-For the OpenCV Element detector, there are some special rules since I haven't standardized it yet:
-- To toggle detection for each element, set the `Pipeline.doSkyStones`, `Pipeline.doStones`, and `Pipeline.doFoundations` static booleans to True or False.
-- To turn on/off the ENTIRE detector, use`start()` and `stop()`. Note that turning off all individual element detections will still consume resources as there are common shared algorithms that run regardless of whether element detection is on or off.
-
-A note: the IMU class, as a non-absolute Localizer, will always return the difference in position since __the last time you called its getter method__. That means that if the robot spins more than 360 degrees between that time, you will have an unreliable rotational reading.
 	
 
 ## Contact
