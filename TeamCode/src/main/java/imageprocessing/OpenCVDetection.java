@@ -3,6 +3,8 @@ package imageprocessing;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import detectors.OpenCvDetector;
+
 /*
 
     If you're using this library, THANKS! I spent a lot of time on it.
