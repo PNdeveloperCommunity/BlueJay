@@ -28,7 +28,8 @@ It follows very simple rules:
 ## Setup
 1. Clone and make a new project at new>project>from version control>git in Android Studio. Code is in the `Teamcode` folder and `bluejay` module. We might do bintray hosting but haven't had time yet :p
 2. Sync Gradle. Search for this command with ctrl+shift+a.
-3. Examples are in the `teamcode` folder.
+3. Go to https://github.com/OpenFTC/OpenCV-Repackaged/tree/master/doc and download the file libOpenCVNative.so. Put this in your phone's storage in the "First" Folder. Depending on your device, the exact location will be different. Look along the lines of "internal" and "storage"
+4. Examples are in the `teamcode` folder.
 
 ## Using the Library
 I've been lax on documentation, so ask if there is ambiguity
