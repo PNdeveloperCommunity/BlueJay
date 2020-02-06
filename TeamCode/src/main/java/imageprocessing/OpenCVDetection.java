@@ -97,7 +97,7 @@ public class OpenCVDetection extends OpMode {
 		/*
 		Each element object has the center x and y. Just do Skystone.x etc.
 
-		Hold your phone horizontally, with cameras on right. origin on (0,0).
+		Hold your phone horizontally, with cameras on right. origin is (0,0), on the top left.
 		Width is 640, height is 480 pixels. For example, center is (320,240)
 		 */
 	}
